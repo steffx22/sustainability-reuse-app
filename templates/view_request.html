@@ -1,0 +1,13 @@
+{% extends "view_post.html" %}
+
+{% block interested_button %}
+{{ url_for('donation_sent', request_id=post['id']) }}
+{% endblock interested_button %}
+
+{% block submit_button %}
+Donate
+{% endblock submit_button %}
+
+{% block post_type %}
+<h2> Request </h2>
+{% endblock post_type %}

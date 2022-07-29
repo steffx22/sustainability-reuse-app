@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block header %}
+<meta charset="UTF-8">
+<title>All ratings</title>
+{% endblock header %}
+{% block base_content %}
+{% if rating_list %}
+<h1 style="font-size: 4em;"> All ratings for {{ owner }}: </h1>
+<br>
+<br>
+{% for rating_obj in rating_list %}
+<div style="color: black; text-align: left; background-color: #ECF3EB; padding: 1em 3em; width: 70%;margin-left: auto; margin-right: auto; border-radius: 4px;">
+    <form action="{{ url_for('view_rating', type=rating_obj['rating_obj']['rating_type'], description=rating_obj['rating_obj']['rating_description'])}}">
+        Title: {{ rating_obj['rating_obj']['rating_type'] }}
+        <br>
+        Description: {{ rating_obj['rating_obj']['rating_description'] }}
+        <br>
+    </form>
+</div>
+<br>
+{% endfor %}
+{% else %}
+<h1 style="font-size: 3em;"> {{ owner }} doesn't have any ratings yet. </h1>
+{% endif %}
+{% endblock base_content %}

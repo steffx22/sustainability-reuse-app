@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pick a new post type</title>
+     <style>
+            body {
+                    background-color: rgb(208, 225, 206);
+            }
+
+            .button {
+                background-color: #F0D5B4;
+                font-size : 25px;
+                padding: 50px 50px;
+                margin: 6px 0;
+                border: none;
+                display: inline-block;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .button:hover {
+                background-color: #C4A874;
+            }
+
+            .center {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 300px;
+            }
+     </style>
+</head>
+<body>
+    <style>
+        h1 {text-align: center;}
+    </style>
+    <h1> Make a post </h1>
+    <div class="center">
+        <form action="{{ url_for('new_donation') }}">
+            <button class="button" type="submit" style="margin-right: 100px;"> Donate </button>
+        </form>
+        <form action="{{ url_for('new_request') }}">
+            <button class="button" type="submit"> Request </button>
+        </form>
+    </div>
+
+</body>
+</html>

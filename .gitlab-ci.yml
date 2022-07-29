@@ -1,0 +1,20 @@
+image: python:latest
+
+test:
+  stage: test
+  script:
+    - apt-get update
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - pytest
+
+deploy-heroku-production:
+  stage: deploy
+  script:
+    - apt update && apt install -y ruby git curl
+    - gem install --user-install dpl-heroku
+    - if which ruby > /dev/null && which gem > /dev/null; then PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"; fi
+    - dpl --provider=heroku --app=reuseapp-prod --api-key=$HEROKU_API_KEY
+  only:
+    - master
+

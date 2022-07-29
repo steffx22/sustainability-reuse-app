@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block base_content %}
+  <style>
+    .button {
+      background-color: #F0D5B4;
+      font-size : 16px;
+      padding: 20px 20px;
+      margin: 6px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #C4A874;
+    }
+    body, h1, h2 {
+      color: black;
+    }
+  </style>
+
+  <h1 class="title" style="color: black; ">
+    Welcome, {{ name }}!
+  </h1>
+  <br>
+  <form action="{{ url_for('successful_profile_picture_upload') }}" method="post" style="color: black;" enctype='multipart/form-data'>
+    {% if profile_picture != "No profile picture" %}
+      <img style="height:5em" src="data:image/png;base64, {{ profile_picture }}" alt="Couldn't load profile picture"/>
+      <br>
+    {% endif %}
+    <input id="profile_picture" type="file" name="profile_picture" placeholder="Upload a profile picture" required="" capture>
+    <button class="button" type="submit"> Save profile picture </button>
+  </form>
+  <br>
+  <font size="4px" color="black">
+    Email: {{ email }}
+  </font>
+  <br>
+  <br>
+  {% if profile_picture %}
+    <img src="">
+  {% else %}
+    <form>
+      <input>
+    </form>
+  {% endif %}
+  <br>
+  <form action="{{ url_for('my_donations') }}" style="display: inline-block;">
+    <button class="button" type="submit"> My donations </button>
+  </form>
+  <form action="{{ url_for('my_requests') }}" style="display: inline-block;">
+    <button class="button" type="submit"> My requests </button>
+  </form>
+  <form action="{{ url_for('my_messages') }}" style="display: inline-block;">
+    <button class="button" type="submit"> My messages </button>
+  </form>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+{% endblock base_content %}

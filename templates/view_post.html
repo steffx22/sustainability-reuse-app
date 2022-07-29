@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> {{ post['title'] }} </title>
+        <style>
+                body {
+                        background-color: rgb(208, 225, 206);
+                }
+
+                .button {
+                    background-color: #F0D5B4;
+                    font-size : 16px;
+                    padding: 7px 12px;
+                    margin: 6px 0;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: point
+                }
+
+        </style>
+    </head>
+    <body>
+    <br>
+    <br>
+    <br>
+    <br>
+        <div style="background-color: #ECF3EB; color: black; padding-left: 5em">
+            <br>
+            <br>
+            {% block post_type %}{% endblock post_type %}
+            <br>
+            <br>
+            Owner of the post: {{ owner[0] }}
+            <form action="{{ url_for('other_user_profile',user=owner[0]) }}">
+                <button class="button" type="submit"> See {{ owner[0] }}'s profile!</button>
+            </form>
+            <br>
+            <br>
+            Email: {{ owner[1] }}
+            <br>
+            <br>
+            {% if post['is_charity'] == "yes" %}
+                        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+                            <font color="red"> <i class='fas fa-hand-holding-heart' style='font-size:24px;color:red'></i> &nbsp; CHARITY </font>
+                            <br>
+            {% endif %}
+            Title: {{ post['title'] }}
+            <br>
+            <br>
+            Description: {{ post['description'] }}
+            <br>
+            <br>
+            Category: {{ post['category'] }}
+            <br>
+            <br>
+            Location: {{ post['location'] }}
+            <form action="{{ url_for('mapview',loc=post['location']) }}">
+                <button class="button" type="submit"> See location on map!</button>
+            </form>
+            <a href="https://www.google.com/maps/search/?api=1&query={{lat}},{{lng}}">See on google maps!</a>
+            <br>
+            <br>
+            Posted on: {{ post['date'] }}
+            <br>
+            {% block other_fields %}{% endblock other_fields %}
+            <br>
+            <br>
+            {% for photo in post['photos'] %}
+                <img style="height:7em" src="data:image/png;base64, {{ photo }}" alt=" "/>
+            {% endfor %}
+            <br>
+            <br>
+
+            People interested:
+            <ul>
+                {% for interested_person in interested_people %}
+                <li> {{ interested_person[0] }} ; {{ interested_person[1] }}
+                    {% if not reserved_person and owner == current_user.user_id %}
+                    <button> Reserve</button>
+                    {% endif %}
+                    {% if reserved_person == interested_person[2]%}
+                    <font color="red"> <b> Reserved! </b> </font>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            <br>
+            <br>
+            <form action={% block interested_button %}{% endblock interested_button %}>
+                <button class="button">
+                    <p style="color:black">
+                        {% block submit_button %}{% endblock submit_button %}
+                        <br>
+                    </p>
+                </button>
+            </form>
+            <br>
+            <br>
+        </div>
+    </body>
+</html>

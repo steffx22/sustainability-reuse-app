@@ -1,0 +1,11 @@
+db.py==0.5.3
+Flask==2.0.1
+Flask-SQLAlchemy==2.5.1 
+SQLAlchemy==1.4.17
+psycopg2==2.8.6
+pytest==6.0.2
+flask-login==0.4.1
+flask-hashing==1.0
+flask-bcrypt==0.7.1
+opencage==1.2.2
+haversine==2.3.1

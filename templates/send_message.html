@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block header %}
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html" http-equiv="refresh" content="15">
+<title>Messages!</title>
+<style>
+    body {
+        background-color: rgb(208, 225, 206);
+        vertical-align:top;
+    }
+
+    .button2 {
+        background-color: rgb(208, 225, 206);
+        font-size : 15px;
+        padding: 10px 50px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        height:80px;
+        width:300px
+    }
+
+span {
+    font-family:arial;
+    font-size:20px;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  max-width: 800px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.name-right {
+  float: right;
+  color: #aaa;
+}
+
+.name-left {
+  float: left;
+  color: #999;
+}
+
+</style>
+{% endblock header %}
+{% block base_content %}
+<div style="text-align: left; font-size: 1em; color:black; ">
+    <button onclick="goBack()" class="button2" ><span> &laquo; </span> Back to my messages</button>
+    <script>
+
+function goBack() {
+  window.history.go(-1);
+}
+    </script>
+</div>
+    <div style="color: black; text-align: center; font-size: 2em;" >
+        My messages with {{ sender }}:
+        <br>
+        <br>
+    </div>
+    {% for message in all_messages %}
+        {% if message['message_obj']['sender_id'] == sender_id %}
+        <div class="container">
+            <p style="color: black; text-align:left; "> {{ message['message_obj']['message'] }} </p>
+        </div>
+        {% else %}
+        <div class="container darker">
+            <p style="font-size: 0.8em; text-align:left; color: orange;"> <i> {{ sender }}: </i>  </p>
+            <p style="color: black; text-align:left; "> {{ message['message_obj']['message'] }} </p>
+        </div>
+        {% endif %}
+    {% endfor %}
+<br>
+<br>
+<div style="text-align: center; color:black; ">
+    <form action="{{ url_for('send_message', user=sender)}}" method="post">
+        <input type="text" id="message" name="message" size="50">
+        <button class="button" type="submit" style="background-color: rgb(208, 225, 206);"> Send message! </button>
+    </form>
+</div>
+{% endblock base_content %}

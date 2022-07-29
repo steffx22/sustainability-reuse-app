@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block header %}
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html" http-equiv="refresh" content="15">
+<title>Messages!</title>
+
+{% endblock header %}
+
+{% block base_content %}
+<style>
+        .button2 {
+        background-color: rgb(208, 225, 206);
+        font-size : 15px;
+        padding: 10px 50px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        height:80px;
+        width:300px
+    }
+</style>
+<div style="text-align: left; font-size: 1em; color:black; ">
+    <button onclick="goBack()" class="button2" ><span> &laquo; </span> Back to my profile</button>
+    <script>
+
+function goBack() {
+  window.history.go(-1);
+}
+    </script>
+</div>
+<br>
+<br>
+    <h1> My messages </h1>
+    <br>
+    <br>
+    {% for conv in convs %}
+        <div style="color: black; text-align: left; background-color: #ECF3EB; padding: 1em 3em; margin-left: auto; margin-right: auto; border-radius: 4px;">
+            <form action="{{ url_for('send_message', user=conv['conv_obj']['receiver_name']) }}">
+                {{ conv['conv_obj']['receiver_name']}}
+                <br>
+                <br>
+                <button class="button" type="submit" > View conversation </button>
+            </form>
+        </div>
+        <br>
+    {% endfor %}
+
+
+{% endblock base_content %}

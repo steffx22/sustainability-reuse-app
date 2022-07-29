@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block base_content %}
+    <h1> ReUse </h1>
+
+    <div style="height: 100%; background-color: rgb(208, 225, 206)">
+        <br>
+        {% block content %}{% endblock content %}
+        <br>
+        <br>
+        <br>
+        <div style="color: black; text-align: left;">
+            {% for post_with_type in posts_with_types %}
+                <div style="background-color: #ECF3EB; padding: 1em 3em; margin-left: auto; margin-right: auto; border-radius: 4px;">
+                    <form action="{{ url_for('view_post', post_id=post_with_type['post']['id'], post_type=post_with_type['type']) }}">
+                        <font size="5px"> {{ post_with_type['type'] }} </font>
+                        <br>
+                        Title: {{ post_with_type['post']['title'] }}
+                        <br>
+                        {% if post_with_type['post']['is_charity'] == "yes" %}
+                        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+                            <font color="red"> <i class='fas fa-hand-holding-heart' style='font-size:24px;color:red'></i> &nbsp; CHARITY </font>
+                            <br>
+                        {% endif %}
+                        {% if post_with_type['post']['reserved'] %}
+                        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+                            <font color="green"><i class='far fa-handshake' style='font-size:24px; color: green;'></i> &nbsp; RESERVED </font>
+                            <br>
+                        {% endif %}
+                        <br>
+                        Description: {{ post_with_type['post']['description'] }}
+                        <br>
+                        {% if post_with_type['type'] == "Donation" %}
+                            Condition: {{ post_with_type['post']['condition'] }}
+                            <br>
+                        {% endif %}
+                        Posted on: {{ post_with_type['post']['date'] }}
+                        <br>
+                        Location: {{ post_with_type['post']['location'] }}
+                        <br>
+                        {% for photo in post_with_type['post']['photos'] %}
+                            <img style="height:7em" src="data:image/png;base64, {{ photo }}" alt=" "/>
+                        {% endfor %}
+                        <br>
+                        <br>
+                        <button class="button" type="submit"> View post </button>
+                    </form>
+                </div>
+                <br>
+            {% endfor %}
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+{% endblock base_content %}
+

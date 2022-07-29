@@ -1,0 +1,15 @@
+{% extends "view_my_post.html" %}
+
+{% block my_post_type %}
+<h2> My donation </h2>
+{% endblock my_post_type %}
+
+{% block other_fields %}
+    <br>
+    <br>
+    Condition: {{ my_post['condition'] }}
+    <br>
+    <br>
+    Condition description: {{ my_post['condition_description'] }}
+    <br>
+{% endblock other_fields %}

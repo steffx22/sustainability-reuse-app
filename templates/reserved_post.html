@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block base_content %}
+  <font color="black"> Congratulations, you have reserved this post for {{ reserved_person }}! </font>
+  <br>
+  <form action=" {{ url_for('other_user_profile', user=reserved_person) }} ">
+    <button> See their profile </button>
+  </form>
+{% endblock base_content %}

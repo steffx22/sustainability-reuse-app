@@ -1,0 +1,17 @@
+{% extends "new_post.html" %}
+
+{% block title %}
+Add request post
+{% endblock title %}
+
+{% block post_button %}
+Post request
+{% endblock post_button %}
+
+{% block post_type %}
+request
+{% endblock post_type %}
+
+{% block submit_action %}
+{{ url_for('successful_post', post_type='request') }}
+{% endblock submit_action %}

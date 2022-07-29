@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block header %}
+    <style>
+        .div_radio {
+            align: left;
+            display: inline-block;
+            color: black;
+            margin-left: 2em;
+            margin-right: 2em;
+        }
+        label {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            margin-left: 30px;
+        }
+    </style>
+{% endblock header %}
+
+{% block content %}
+
+<div style="text-align: left">
+    <form action="{{ url_for('index') }}">
+        <input style="text-align: center; align: center;" type="text" id="search_sentence" name="search_sentence" placeholder="Search...">
+        <label style="color: black;"> Sort by: </label>
+        <select name="sort_by" id="sort_by">
+            <option value="no_sort"> Do not sort </option>
+            <option value="Date"> Date </option>
+        </select>
+        <br>
+        <br>
+        <label style="color: black"> Select category: </label>
+        <br>
+        <br>
+        <div style="display: inline-block; align: left; text-align: left;">
+            <div class="div_radio">
+                <input name="category" value="clothes" type="radio"> clothes <br>
+                <input name="category" value="books" type="radio"> books <br>
+                <input name="category" value="toys" type="radio"> toys <br>
+                <input name="category" value="sports" type="radio"> sports <br>
+            </div>
+            <div class="div_radio">
+                <input name="category" value="gaming" type="radio"> gaming <br>
+                <input name="category" value="school" type="radio"> school <br>
+                <input name="category" value="furniture" type="radio"> furniture <br>
+                <input name="category" value="perishables" type="radio"> perishables <br>
+            </div>
+            <div class="div_radio">
+                <input name="category" value="kitchen ware" type="radio"> kitchen ware <br>
+                <input name="category" value="self care" type="radio"> self care <br>
+                <input name="category" value="cars" type="radio"> card <br>
+                <input name="category" value="electronics" type="radio"> electronics <br>
+            </div>
+            <div class="div_radio">
+                <input name="category" value="gardening" type="radio"> gardening <br>
+                <input name="category" value="other" type="radio"> other <br>
+                <br>
+                <br>
+            </div>
+        </div>
+        <br>
+        <br>
+        <label style="color: black;"> Post type: </label>
+        <select name="posts_type" id="posts_type">
+            <option value="all"> All </option>
+            <option value="donation"> Donation </option>
+            <option value="request"> Request </option>
+        </select>
+        <label style="color: black;"> Poster: </label>
+        <select name="poster" id="poster">
+            <option value="all"> All </option>
+            <option value="charities"> charities </option>
+            <option value="non_charities"> non-charities </option>
+        </select>
+        <label style="color: black;"> See reserved posts: </label>
+        <select name="reserved_post" id="reserved_post">
+            <option value="yes"> Yes </option>
+            <option value="no"> No </option>
+        </select>
+        <label style="color: black"> Select condition (donations only): </label>
+        <select name="condition" id="condition">
+            <option value="all" type="radio"> All </option>
+            <option value="new" type="radio"> New </option>
+            <option value="used" type="radio"> Used </option>
+            <option value="damaged" type="radio"> Damaged </option>>
+        </select>
+        <br>
+        <label style="color: black"> Select location: </label>
+        <input type="text" name="location" id="location">
+        <label type="text" style="color: black"> Select location range (in km): </label>
+        <input type="number" name="location_range" id="location_range">
+        <br>
+        <br>
+<!--        <div class="div_radio" style="display: inline-block; align: left; text-align: left;">-->
+<!--            <input name="condition" value="new" type="radio"> new <br>-->
+<!--            <input name="condition" value="used" type="radio"> used <br>-->
+<!--            <input name="condition" value="damaged" type="radio"> damaged <br>-->
+<!--        </div>-->
+        <button class="button" type="submit"> Search! </button>
+    </form>
+    <form action="{{ url_for('pick_new_post') }}">
+        <button class="button" type="submit"><i class="material-icons" style="font-size:18px;">add_circle</i> Add a post!</button>
+    </form>
+
+    <br>
+</div>
+
+{% endblock content %}

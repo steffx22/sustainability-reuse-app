@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block header %}
+<meta charset="UTF-8">
+<title>Profile!</title>
+<style>
+    body {
+        background-color: rgb(208, 225, 206);
+        vertical-align:top;
+    }
+
+    .button2 {
+        background-color: #F0D5B4;
+        font-size : 15px;
+        padding: 10px 50px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        height:80px;
+        width:250px
+    }
+
+    .button2:hover {
+        background-color: #C4A874;
+    }
+
+#div1 {
+  font-size:24px;
+  color: rgb(255,255,0);
+}
+
+
+
+
+</style>
+{% endblock header %}
+
+{% block base_content %}
+
+<div style="text-align: center; display:inline-block; width:60%;">
+    <br>
+    <p style="color:black;font-size:30px;"> {{ owner }} </p>
+    <br>
+    <br>
+    {% if profile_picture != "No profile picture" %}
+      <img style="height:5em" src="data:image/png;base64, {{ profile_picture }}" alt="Couldn't load profile picture"/>
+      <br>
+    {% endif %}
+    <br>
+</div>
+<div style="text-align: left; display:inline-block; width:70%;">
+    <p style="color:black; font-size: 1em;"> Rating: {{ rating_message }}</p>
+    {% if rating_list %}
+    {% for i in full_stars %}
+    <span style="font-size:250%;color:yellow;">&starf;</span>
+    {% endfor %}
+    {% for i in empty_stars %}
+    <span style="font-size:250%;color:yellow;">&star;</span>
+    {% endfor %}
+    <br>
+    <a href="{{ url_for('see_all_ratings', user=owner) }}" style="color: black; font-size: 18px;">
+        <u> See all ratings </u>
+    </a>
+    {% endif %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div style="text-align: right; display:inline-block;">
+    <form action="{{ url_for('send_message', user=owner) }}">
+        <button class="button2" type="submit" style="margin-right: 30px;"> Send a message! <span style='font-size:20px;'> &#128232; </span>
+        </button>
+    </form>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <form action="{{ url_for('user_rating', user=owner) }}">
+        <button class="button2" type="submit" style="margin-right: 30px;"> Leave a rating!
+            <div id="div1" class="fa"></div>
+        </button>
+    </form>
+    <form action="{{ url_for('report_user', user=owner) }}">
+        <button class="button2" type="submit" style="margin-right: 30px;">Report {{ owner }} <span> &#10071; </span>
+        </button>
+    </form>
+    <script>
+function ratestar() {
+  var a;
+  a = document.getElementById("div1");
+  a.innerHTML = "&#xf006;";
+  setTimeout(function () {
+      a.innerHTML = "&#xf123;";
+    }, 1000);
+  setTimeout(function () {
+      a.innerHTML = "&#xf005;";
+    }, 2000);
+}
+ratestar();
+setInterval(ratestar, 3000);
+
+    </script>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+{% endblock base_content %}

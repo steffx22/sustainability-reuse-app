@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block header %}
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html">
+<title>Profile!</title>
+<style>
+    body {
+        background-color: rgb(208, 225, 206);
+        vertical-align:top;
+    }
+
+    .button2 {
+        background-color: rgb(208, 225, 206);
+        font-size : 15px;
+        padding: 10px 50px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        height:80px;
+        width:300px
+    }
+
+    .button2:hover {
+        background-color: #C4A874;
+    }
+
+
+span {
+    font-family:arial;
+    font-size:20px;
+}
+
+
+</style>
+{% endblock header %}
+
+{% block base_content %}
+
+<div style="text-align: left; font-size: 1em; color:black; ">
+    <button onclick="goBack()" class="button2"><span> &laquo; </span> Back to profile</button>
+    <script>
+
+function goBack() {
+  window.history.go(-2);
+}
+
+
+    </script>
+</div>
+<br>
+<br>
+<br>
+<div style="text-align: center; font-size: 1em; color:black; ">
+    <span> &#10003 </span> Thank you for reporting {{ owner }}.
+    <br>
+    <br>
+    Message provided: <i> {{ message }} </i>.
+    <br>
+    <br>
+    <br>
+    <br>
+    We will check the request and take the corresponding actions.
+    <br>
+    <br>
+    <br>
+</div>
+{% endblock base_content %}

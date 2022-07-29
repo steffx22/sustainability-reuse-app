@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block header %}
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html">
+<title>Profile!</title>
+<style>
+    body {
+        background-color: rgb(208, 225, 206);
+        vertical-align:top;
+    }
+
+    .button2 {
+        background-color: rgb(208, 225, 206);
+        font-size : 15px;
+        padding: 10px 50px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        height:80px;
+        width:200px
+    }
+
+    .button2:hover {
+        background-color: #C4A874;
+    }
+
+</style>
+{% endblock header %}
+
+{% block base_content %}
+
+<div style="text-align: left; color:black; ">
+    <p> Leave a rating for {{ owner }}: </p>
+    <br>
+    <form action="{{ url_for('finish_rating_action', user=owner)}}">
+        <input type="radio" name="message" value="Trustworthy">
+        Trustworthy
+        <br>
+        <br>
+        <input type="radio" name="message" value="Untrustworthy">
+        Untrustworthy
+        <br>
+        <br>
+        <input type="radio" name="message" value="Did not feel safe">
+        Didn't feel safe
+        <br>
+        <br>
+        <input type="radio" name="message" value="Met on time">
+        Met on time
+        <br>
+        <br>
+        <input type="radio" name="message" value="They were very late">
+        They were very late
+        <br>
+        <br>
+        <input type="radio" name="message" value="They were kind, polite">
+        They were kind, polite
+        <br>
+        <br>
+        <input type="radio" name="message" value="They were not very kind, rude">
+        They were not very kind, rude
+        <br>
+        <br>
+        <input type="radio" name="message" value="Item did not match the description">
+        Item didn't match the description
+        <br>
+        <br>
+        <input type="radio" name="message" value="Other">
+        Other: (please mention in the comments)
+        <br>
+        <br>
+        <label> Comments: </label> <input type="text" id="rating_description" name="rating_description">
+        <br>
+        <br>
+        <button class="button2" type="submit" style="margin-right: 30px;"> Rate!</button>
+    </form>
+</div>
+
+{% endblock base_content %}

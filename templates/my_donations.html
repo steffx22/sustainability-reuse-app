@@ -1,0 +1,110 @@
+{% extends "my_posts.html" %}
+
+{% block title %} My donations {% endblock title%}
+
+{% block content %}
+<style>
+        .button2 {
+        background-color: rgb(208, 225, 206);
+        font-size : 15px;
+        padding: 10px 50px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        height:80px;
+        width:300px
+    }
+</style>
+<div style="text-align: left; font-size: 1em; color:black; ">
+    <button onclick="goBack()" class="button2" ><span> &laquo; </span> Back to my profile</button>
+    <script>
+
+    function goBack() {
+      window.history.go(-1);
+    }
+
+    </script>
+</div>
+    <h1> My donations </h1>
+    <br>
+    {% for my_donation_with_type in my_donations_with_types %}
+        <div style="color: black; text-align: left; background-color: #ECF3EB; padding: 1em 3em; margin-left: auto; margin-right: auto; border-radius: 4px;">
+            <form action="{{ url_for('view_my_post', my_post_id=my_donation_with_type['post']['id'], my_post_type=my_donation_with_type['type']) }}">
+                <font size="5px"> Donation </font>
+                <br>
+                Title: {{ my_donation_with_type['post']['title'] }}
+                <br>
+                {% if my_donation_with_type['post']['is_charity'] == "yes" %}
+                        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+                            <font color="red"> <i class='fas fa-hand-holding-heart' style='font-size:24px;color:red'></i> &nbsp; CHARITY </font>
+                            <br>
+                {% endif %}
+                {% if my_donation_with_type['post']['reserved'] %}
+                        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+                            <font color="green"><i class='far fa-handshake' style='font-size:24px; color: green;'></i> &nbsp; RESERVED </font>
+                            <br>
+                        {% endif %}
+                <br>
+                Description: {{ my_donation_with_type['post']['description'] }}
+                <br>
+                {% if my_donation_with_type['type'] == "Donation" %}
+                    Condition: {{ my_donation_with_type['post']['condition'] }}
+                    <br>
+                {% endif %}
+                Posted on: {{ my_donation_with_type['post']['date'] }}
+                <br>
+                Location: {{ my_donation_with_type['post']['location'] }}
+                <br>
+                {% for photo in my_donation_with_type['post']['photos'] %}
+                    <img style="height:7em" src="data:image/png;base64, {{ photo }}" alt=" "/>
+                {% endfor %}
+                <br>
+                <button class="button" type="submit"> View donation </button>
+            </form>
+        </div>
+        <br>
+    {% endfor %}
+
+    <br> <font color="black" size="5px"> These following posts older than 90 days. They have been automatically deactivated after 90 days, but you can
+        reactivate them by clicking on the ACTIVATE button. </font> <br> <br>
+
+    {% for my_timeouted_donation_with_type in my_timeouted_donations_with_types %}
+        <div style="color: black; text-align: left; background-color: #ECF3EB; padding: 1em 3em; margin-left: auto; margin-right: auto; border-radius: 4px;">
+            <form action="{{ url_for('view_my_post', my_post_id=my_timeouted_donation_with_type['post']['id'], my_post_type=my_timeouted_donation_with_type['type']) }}">
+                <font size="5px"> Donation </font>
+                <br>
+                Title: {{ my_timeouted_donation_with_type['post']['title'] }}
+                <br>
+                {% if my_timeouted_donation_with_type['post']['reserved'] %}
+                    <font color="red"> THIS POST IS RESERVED </font>
+                    <br>
+                {% endif %}
+                <br>
+                Description: {{ my_timeouted_donation_with_type['post']['description'] }}
+                <br>
+                {% if my_timeouted_donation_with_type['type'] == "Donation" %}
+                    Condition: {{ my_timeouted_donation_with_type['post']['condition'] }}
+                    <br>
+                {% endif %}
+                Posted on: {{ my_timeouted_donation_with_type['post']['date'] }}
+                <br>
+                Location: {{ my_timeouted_donation_with_type['post']['location'] }}
+                <br>
+                {% for photo in my_timeouted_donation_with_type['post']['photos'] %}
+                    <img style="height:7em" src="data:image/png;base64, {{ photo }}" alt=" "/>
+                {% endfor %}
+                <br>
+                {% if my_timeouted_donation_with_type['post']['is_charity'] == "yes" %}
+                    <font color="red"> THIS IS A CHARITY </font>
+                    <br>
+                {% endif %}
+                <button class="button" type="submit"> View donation </button>
+            </form>
+            <form action="{{ url_for('activated_post', my_post_id=my_timeouted_donation_with_type['post']['id'], my_post_type=my_timeouted_donation_with_type['type']) }}">
+                <button class="button" type="submit"> ACTIVATE </button>
+            </form>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock content %}

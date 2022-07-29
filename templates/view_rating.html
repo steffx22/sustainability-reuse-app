@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block header %}
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html">
+<title>Profile!</title>
+<style>
+    body {
+        background-color: rgb(208, 225, 206);
+        vertical-align:top;
+    }
+
+    .button2 {
+        background-color: rgb(208, 225, 206);
+        font-size : 15px;
+        padding: 10px 50px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        height:80px;
+        width:200px
+    }
+
+    .button2:hover {
+        background-color: #C4A874;
+    }
+
+</style>
+{% endblock header %}
+
+{% block base_content %}
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body {
+                    background-color: rgb(208, 225, 206);
+            }
+
+            .button {
+                background-color: #F0D5B4;
+                font-size : 16px;
+                padding: 7px 12px;
+                margin: 6px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style="background-color: #ECF3EB; color: black; padding-left: 5em">
+            Type: {{ type }}
+            <br>
+            <br>
+            Description: {{ description }}
+        </div>
+{% endblock base_content %}

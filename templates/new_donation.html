@@ -1,0 +1,34 @@
+{% extends "new_post.html" %}
+
+{% block title %}
+Add donation post
+{% endblock title %}
+
+{% block post_button %}
+Post donation
+{% endblock post_button %}
+
+{% block post_type %}
+donation
+{% endblock post_type %}
+
+{% block extra_fields %}
+
+<input type="radio" id="new" name="post_condition" value="new" />
+<label for="new"> New </label>
+<br>
+<input type="radio" id="used" name="post_condition" value="used" />
+<label for="used"> Used </label>
+<br>
+<input type="radio" id="damaged" name="post_condition" value="damaged" />
+<label for="damaged"> Damaged </label>
+<br>
+<label> Additional information about condition: </label> <input type="text" id="post_condition_description" name="post_condition_description">
+<br>
+<!--<button class="button"> Add images </button>-->
+<br>
+{% endblock extra_fields %}
+
+{% block submit_action %}
+{{ url_for('successful_post', post_type='donation') }}
+{% endblock submit_action %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Successful {{ post_type }} post
+{% endblock title %}
+
+{% block header %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+     <style>
+            body {
+                    background-color: rgb(208, 225, 206);
+            }
+
+            .button {
+                background-color: #F0D5B4;
+                font-size : 16px;
+                padding: 7px 12px;
+                margin: 6px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+     </style>
+{% endblock header %}
+
+{% block base_content %}
+    <font color="black"> You have successfully added a profile picture! </font>
+    <form action="{{ url_for('profile') }}">
+        <button class="button" type="submit"><i class="material-icons" style="font-size:18px;">home</i> My profile </button>
+    </form>
+{% endblock base_content %}
